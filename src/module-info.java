@@ -1,0 +1,6 @@
+/**
+ * @author dell
+ *
+ */
+module coreJavaPractice {
+}
