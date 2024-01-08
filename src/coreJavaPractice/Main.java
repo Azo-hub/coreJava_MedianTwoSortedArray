@@ -1,5 +1,6 @@
 package coreJavaPractice;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -10,59 +11,43 @@ import java.util.Stack;
 public class Main {
 	
 	public static void main(String [] args) {
-		/* Reverse Polish Notation
-		 * ["2", "1", "+", "3", "*"] => ((2 + 1) * 3) => 9 
-		 * ["4", "13", "5", "/", "+"] => (4 + (13 / 5)) => 6
-		 */
+		/* Rotating an array to the right or left by some steps */
 		
-		String[] tokens = {"4", "13", "5", "/", "+"};
-		System.out.println(evalRPN(tokens));
+		int[] array = {1, 2, 3, 4, 5, 6, 7, 8}; 
+		int step = 3;
+		
+		rotateRight(array, step);
 		
 	}
 	
-	public static int evalRPN(String[] tokens) {
+	public static void rotateRight(int [] array, int step) {
 		
-		int returnValue = 0;
-		String operators = "+-*/";
-		
-		Stack<String> stack = new Stack<>();
-		
-		for(String t : tokens) {
+		if(step > array.length) {
 			
-			if(!operators.contains(t)) {
-				stack.push(t);
-			} else {
-				
-				int a = Integer.valueOf(stack.pop());
-				int b = Integer.valueOf(stack.pop());
-				
-				/* System.out.print("a: " + a + "and b: " + b); */
-				
-				switch(t) {
-				
-				case "+":
-					stack.push(String.valueOf(b + a));
-					break;
-					
-				case "-":
-					stack.push(String.valueOf(b - a));
-					break;
-					
-				case "*":
-					stack.push(String.valueOf(b * a));
-					break;
-					
-				case "/":
-					stack.push(String.valueOf(b / a));
-					break;
-					
-				}
-			}
+			step = step % array.length;
 		}
 		
-		returnValue = Integer.valueOf(stack.pop());
+		int [] result = new int[array.length];
 		
-		return returnValue;
+		for(int i = 0; i < step; i++) {
+			
+			result[i] = array[array.length - step + i];
+			
+		}
+		
+		int j = 0;
+		  
+		for(int i = step; i < array.length; i++) {
+		  
+		result[i] = array[j]; 
+		
+		j++;
+		
+		}
+		 
+		
+		System.out.print(Arrays.toString(result));
+		
 	}
 	
 	
